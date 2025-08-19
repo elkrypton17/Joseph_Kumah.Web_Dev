@@ -1,0 +1,259 @@
+/* Page Transitions CSS */
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Section transitions */
+section {
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    opacity: 1; /* Ensure sections are visible by default */
+}
+
+/* Fade-in animation for elements */
+.fade-in {
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide-in animations from different directions */
+.slide-in-left {
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.slide-in-up {
+    animation: slideInUp 0.8s ease forwards;
+}
+
+.slide-in-down {
+    animation: slideInDown 0.8s ease forwards;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Page transition overlay */
+.page-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    z-index: 9999;
+    transform: translateY(100%);
+    transition: transform 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+.page-transition-overlay.active {
+    transform: translateY(0);
+}
+
+.page-transition-overlay.fade-out {
+    transform: translateY(-100%);
+}
+
+/* Staggered animations for grid items */
+.stagger-item {
+    opacity: 1; /* Visible by default */
+    transform: translateY(0); /* No initial transform */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Only apply transitions when JavaScript is enabled */
+.js-enabled .stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.js-enabled .stagger-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover transitions */
+.hover-lift {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hover-lift::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    transform: scale(1.1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hover-lift:hover::before {
+    opacity: 0.1;
+    transform: scale(1);
+}
+
+/* Special hover effects for cards */
+.achievement-card.hover-lift:hover {
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+}
+
+.achievement-card.hover-lift:hover .achievement-icon {
+    transform: scale(1.2);
+}
+
+/* Gallery item hover effects */
+.gallery-item.hover-lift::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, var(--primary-color) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item.hover-lift:hover::after {
+    opacity: 0.7;
+}
+
+/* Smooth color transitions */
+.color-transition {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Pulse animation for attention */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Rotate animation */
+.rotate {
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Page loading animation */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.page-loader.loaded {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--primary-color);
+    border-top-color: var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
